@@ -5,8 +5,16 @@ services:
       dockerfile: Dockerfile
       args:
         NPM_REGISTRY: ${NPM_REGISTRY:-https://registry.npmjs.org/}
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY:?OPENAI_API_KEY is required}
+      APP_USERNAME: ${APP_USERNAME:-admin}
+      APP_PASSWORD: ${APP_PASSWORD:-mkssrl}
+      AUTH_SECRET: ${AUTH_SECRET:-mks-auth-dev-secret}
+    volumes:
+      - plantillas_data:/app/context/Plantillas
     restart: unless-stopped
+
+volumes:
+  plantillas_data:

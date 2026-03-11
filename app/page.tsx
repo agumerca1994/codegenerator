@@ -5,6 +5,7 @@ import { CodeOutput } from "@/components/CodeOutput";
 import { FieldsTable } from "@/components/FieldsTable";
 import { PdfUploader } from "@/components/PdfUploader";
 import { StepIndicator } from "@/components/StepIndicator";
+import { TemplateEditor } from "@/components/TemplateEditor";
 import { TextInput } from "@/components/TextInput";
 import type { GeneratedCode, InputMode } from "@/lib/types";
 
@@ -122,7 +123,7 @@ export default function HomePage() {
           <p className="text-sm text-gray-400">Genera código JavaScript para n8n a partir de facturas PDF</p>
         </header>
 
-        <StepIndicator currentStep={step} />
+        {inputMode !== "templates" && <StepIndicator currentStep={step} />}
 
         {error && <div className="rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-300">{error}</div>}
         {warning && (
@@ -152,6 +153,20 @@ export default function HomePage() {
             <button
               type="button"
               onClick={() => {
+                setInputMode("templates");
+                setGeneratedCode(null);
+                setError(null);
+                setWarning(null);
+              }}
+              className={`rounded-lg px-3 py-2 text-sm ${
+                inputMode === "templates" ? "bg-blue-500 text-white" : "bg-gray-800 text-gray-300"
+              }`}
+            >
+              Plantillas
+            </button>
+            <button
+              type="button"
+              onClick={() => {
                 setInputMode("text");
                 setGeneratedCode(null);
                 setError(null);
@@ -164,7 +179,9 @@ export default function HomePage() {
             </button>
           </div>
 
-          {inputMode === "pdf" ? (
+          {inputMode === "templates" ? (
+            <TemplateEditor />
+          ) : inputMode === "pdf" ? (
             <PdfUploader
               onTextExtracted={(text, fileName) => handleTextExtracted(text, fileName)}
               isLoading={isExtracting}
@@ -173,28 +190,29 @@ export default function HomePage() {
           ) : (
             <TextInput value={extractedText} onChange={(text) => handleTextExtracted(text)} />
           )}
-
-          <div className="mt-6 border-t border-gray-800 pt-4">
-            <button
-              type="button"
-              disabled={!canGenerate}
-              onClick={handleGenerate}
-              className="inline-flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {isGenerating ? (
-                <>
-                  <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  {GENERATING_MESSAGES[loadingMessageIndex]}
-                </>
-              ) : (
-                "Generar Código"
-              )}
-            </button>
-            <p className="mt-2 text-xs text-gray-500">Se requieren al menos 50 caracteres de texto para generar.</p>
-          </div>
+          {inputMode !== "templates" && (
+            <div className="mt-6 border-t border-gray-800 pt-4">
+              <button
+                type="button"
+                disabled={!canGenerate}
+                onClick={handleGenerate}
+                className="inline-flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-400 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isGenerating ? (
+                  <>
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    {GENERATING_MESSAGES[loadingMessageIndex]}
+                  </>
+                ) : (
+                  "Generar Código"
+                )}
+              </button>
+              <p className="mt-2 text-xs text-gray-500">Se requieren al menos 50 caracteres de texto para generar.</p>
+            </div>
+          )}
         </section>
 
-        {generatedCode && (
+        {inputMode !== "templates" && generatedCode && (
           <section className="space-y-4">
             <FieldsTable fields={generatedCode.fields} />
             <CodeOutput generatedCode={generatedCode} />
@@ -204,3 +222,4 @@ export default function HomePage() {
     </main>
   );
 }
+

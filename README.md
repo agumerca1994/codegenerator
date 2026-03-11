@@ -23,7 +23,13 @@ cp .env.local.example .env.local
 
 ```env
 OPENAI_API_KEY=tu_api_key_real
+# Opcional (login simple para Plantillas)
+# APP_USERNAME=admin
+# APP_PASSWORD=mkssrl
+# AUTH_SECRET=cambia_este_secreto
 ```
+
+Si no defines `APP_USERNAME`/`APP_PASSWORD`, se usan defaults `admin` / `mkssrl`.
 
 ## Ejecutar en local con Docker (WSL)
 
@@ -32,6 +38,8 @@ Desde el directorio del proyecto:
 ```bash
 docker compose --env-file .env.local up --build
 ```
+
+La carpeta de plantillas (`/app/context/Plantillas`) queda en volumen Docker persistente (`plantillas_data`), por lo que no se pierde al recrear contenedor.
 
 Si tu red/proxy bloquea `registry.npmjs.org` (errores 400/403/5xx en `npm install`), define en `.env.local`:
 
@@ -60,6 +68,23 @@ docker compose down
 
 - `POST /api/extract-pdf` (multipart/form-data con campo `file` PDF)
 - `POST /api/generate-code` (`{ "text": "..." }`)
+- `POST /api/auth/login` (`{ "username": "...", "password": "..." }`)
+- `POST /api/auth/logout`
+- `GET /api/auth/session`
+
+### Protección de Plantillas
+
+Los endpoints de plantillas requieren sesión iniciada (cookie `HttpOnly`) con login simple:
+
+- Usuario default: `admin`
+- Clave default: `mkssrl`
+
+Endpoints protegidos:
+
+- `GET/POST /api/templates`
+- `GET/PUT /api/templates/[id]`
+- `GET/POST /api/templates/[id]/source-pdf`
+- `POST /api/generate-code-template`
 
 ## Validaciones funcionales rápidas
 
