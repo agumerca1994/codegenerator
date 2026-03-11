@@ -1,0 +1,71 @@
+[
+  {
+    "tipoComprobante": "FACTURA",
+    "tipoFactura": "A",
+    "comprobante": "0022-00486444",
+    "puntoVenta": "0022",
+    "numeroComprobante": "00486444",
+    "fecha": "01/03/2026",
+    "vencimiento": "11/03/2027",
+    "emisorNombre": "albacaucion",
+    "emisorCUIT": "30711867240",
+    "clienteNombre": "MKS S.R.L",
+    "clienteCUIT": "30711867240",
+    "condicionIVA": null,
+    "cae": "86095793967455",
+    "vencCae": "11/03/2026",
+    "ivaPorc": 21,
+    "bonificacion": null,
+    "netoGravado": 40155,
+    "iva27": null,
+    "iva21": 432.55,
+    "iva105": null,
+    "iva5": null,
+    "iva25": null,
+    "iva0": null,
+    "total": 49470.97,
+    "conceptos": [
+      {
+        "cantidad": 1,
+        "descripcion": "CORTE SUPREMA DE JUSTICIA DE LA NACION SERVICIO NACIONAL DE SANIDAD Y CALIDAD AGROALIMENTARIA - SENASA RIESGO GARANTIA ADJUDICACION - Suministro y/o Servicio Publico Período 11/03/2026 al 11/03/2027 OBJETO Orden de Compra 52-0030 Orden de Compra 52-0030-OC25 - Expte.Nº EX-2023-113183309- - APN- DSAYF#SENASA Servicio de Dosimetría personal por el plazo de 12 meses - Póliza N°: 000001047030.",
+        "precioUnitario": null,
+        "bonifPorc": null,
+        "ivaPorc": 21,
+        "importe": null
+      },
+      {
+        "cantidad": 1,
+        "descripcion": "Impuestos y Tasas",
+        "precioUnitario": null,
+        "bonifPorc": null,
+        "ivaPorc": 21,
+        "importe": 481.87
+      },
+      {
+        "cantidad": 1,
+        "descripcion": "Percepción IIBB",
+        "precioUnitario": null,
+        "bonifPorc": null,
+        "ivaPorc": 21,
+        "importe": 0
+      },
+      {
+        "cantidad": 1,
+        "descripcion": "Gastos",
+        "precioUnitario": null,
+        "bonifPorc": null,
+        "ivaPorc": 21,
+        "importe": 0
+      },
+      {
+        "cantidad": 1,
+        "descripcion": "Prov. Córdoba Sellado",
+        "precioUnitario": null,
+        "bonifPorc": null,
+        "ivaPorc": 21,
+        "importe": 401.55
+      }
+    ],
+    "invoiceKey": "30711867240|FACTURA|A|00486444|01/03/2026|49470.97"
+  }
+]
