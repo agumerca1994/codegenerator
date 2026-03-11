@@ -56,7 +56,9 @@ docker compose --env-file .env.local up
 
 Abrir en navegador:
 
-- `http://localhost:3000`
+- `http://localhost:3001`
+
+Si el puerto `3001` está ocupado, cambia temporalmente el mapeo en `docker-compose.yml` (por ejemplo `3002:3000`).
 
 Para detener:
 
@@ -128,7 +130,7 @@ npm run benchmark:api
 Opcionalmente puedes cambiar URL:
 
 ```bash
-BENCH_API_URL=http://localhost:3000 npm run benchmark:api
+BENCH_API_URL=http://localhost:3001 npm run benchmark:api
 ```
 
 ## Deploy en EasyPanel (Ubuntu)
@@ -141,6 +143,7 @@ BENCH_API_URL=http://localhost:3000 npm run benchmark:api
 - Build context: raíz del repo.
 - Dockerfile path: `./Dockerfile`.
 - Puerto interno: `3000`.
+  Con `docker-compose` de este repo, el host se publica en `3001` hacia contenedor `3000`.
 4. Agrega variable de entorno en EasyPanel:
 - `OPENAI_API_KEY` con tu valor real.
 5. Ejecuta el deploy inicial.

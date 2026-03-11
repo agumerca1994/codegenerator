@@ -6,7 +6,7 @@ services:
       args:
         NPM_REGISTRY: ${NPM_REGISTRY:-https://registry.npmjs.org/}
     ports:
-      - "3000:3000"
+      - "3001:3000"
     environment:
       OPENAI_API_KEY: ${OPENAI_API_KEY:?OPENAI_API_KEY is required}
       APP_USERNAME: ${APP_USERNAME:-admin}
